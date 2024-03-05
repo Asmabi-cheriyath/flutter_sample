@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter_samples/datas.dart';
+
 
 class Screen extends StatelessWidget {
   const Screen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Datas datas = Datas();
     return Scaffold(
-      backgroundColor: Colors.cyan,
+      backgroundColor: Colors.pink[200],
       // appBar: AppBar(
       //   backgroundColor: Colors.white,leadingWidth: 100,
       //   leading: Row(
@@ -54,7 +56,7 @@ class Screen extends StatelessWidget {
               style: TextStyle(color: Colors.blueGrey[200]),
             ),
             // const Text("add account"),
-            OutlinedButton(onPressed: () {}, child: Text("Add content +"))
+            OutlinedButton(onPressed: () {}, child: const Text("Add content +"))
           ],
         ),
         const Column(
@@ -81,61 +83,130 @@ class Screen extends StatelessWidget {
         //     )
         //   ],
         // ),
-      
+
         SizedBox(
           height: 190,
           width: MediaQuery.of(context).size.width,
           child: Expanded(
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: 50,
-              separatorBuilder: (context, index) => SizedBox(
+              itemCount: datas.items.length,
+              separatorBuilder: (context, index) => const SizedBox(
                 width: 10,
               ),
               itemBuilder: (context, index) {
-                return Container(
-                  height: 5,
-                  width: 160,
-                  decoration: BoxDecoration(
-                      color: Colors.blueAccent,
-                      borderRadius: BorderRadius.circular(20),image: DecorationImage(image: AssetImage("images/888.jpg"))),
-                child: Padding(
+                return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row(crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [CircleAvatar(backgroundImage: AssetImage("images/888.jpg",),),Text(" name "),Text(" time ")],
+                  child: Container(
+                    height: 5,
+                    width: 160,
+                    decoration: BoxDecoration(
+                        color: Colors.blueAccent,
+                        borderRadius: BorderRadius.circular(20),
+                        image:  DecorationImage(
+                            image: AssetImage(datas.items[index]["image"]),fit: BoxFit.fill)),
+                    child:  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Align(alignment: AlignmentDirectional.bottomCenter,
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage(
+                                datas.items[index]["photo"],
+                              ),
+                            ),
+                          ),
+                          Text(datas.items[index]["name"],style: const TextStyle(color: Colors.white),),
+                          Text(datas.items[index]["time"],style: const TextStyle(color: Colors.white),)
+                        ],
+                      ),
+                    ),
                   ),
-                ),     
                 );
               },
             ),
           ),
         ),
-      
-      
-      
-         Expanded(
-           child: ListView.separated(
-             scrollDirection: Axis.vertical,
-             itemCount: 40,
-             separatorBuilder: (context, index) => SizedBox(
-               width: 10,
-             ),
-             itemBuilder: (context, index) {
-               return Padding(
-                 padding: const EdgeInsets.all(8.0),
-                 child: Container(
-                   height: 200,
-                   width: 140,
-                   decoration: BoxDecoration(
-                       color: Colors.blueAccent,
-                       borderRadius: BorderRadius.circular(20),image: DecorationImage(image: AssetImage("images/apple.jpg"),fit: BoxFit.fill)),
-                 ),
-               );
-             },
-           ),
-         ),
-      
-      
+        
+        
+        const Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage("images/114.jpeg"),
+            ),
+            SizedBox(width: 10),
+            Text(
+              'trevor',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.deepPurple),
+            ),
+            SizedBox(width: 10),
+            Text(
+              '15m',
+              style: TextStyle(color: Colors.deepPurple),
+            ),
+            Spacer(),
+            Icon(
+              Icons.more_vert,
+              color: Colors.deepPurple,
+            ),
+          ],
+        ),
+
+
+
+        Expanded(
+          child: ListView.separated(
+            scrollDirection: Axis.vertical,
+            itemCount: datas.items.length,
+            separatorBuilder: (context, index) => const SizedBox(
+              width: 10,
+            ),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 200,
+                  width: 140,
+                  decoration: BoxDecoration(
+                      color: Colors.blueAccent,
+                      borderRadius: BorderRadius.circular(20),
+                      image:  DecorationImage(
+                          image: AssetImage(datas.items[index]["image"]),
+                          fit: BoxFit.fill)),
+                ),
+              );
+            },
+          ),
+        ),
+
+
+
+        const Row(
+          children: [
+            Icon(
+              Icons.heart_broken_rounded,
+              color: Colors.blueGrey,
+            ),
+            Icon(
+              Icons.comment,
+              color: Colors.blueGrey,
+            ),
+            Icon(
+              Icons.share,
+              color: Colors.blueGrey,
+            ),
+            Spacer(),
+            Icon(
+              Icons.save,
+              color: Colors.blueGrey,
+            ),
+          ],
+        ),
+
+
+
         // const Row(
         //   children: [
         //     CircleAvatar(
@@ -159,7 +230,7 @@ class Screen extends StatelessWidget {
         //     ),
         //   ],
         // ),
-      
+
         // Container(
         //   height: 200,
         //   width: 500,
@@ -186,15 +257,7 @@ class Screen extends StatelessWidget {
         //     ),
         //   ],
         // ),
-      
-        
-      
-      
-        
-      
-      
-      
-      
+
         // Center(
         //   child: Padding(
         //     padding: const EdgeInsets.all(8.0),
@@ -210,20 +273,21 @@ class Screen extends StatelessWidget {
         //     ),
         //   ),
         // ),
-        // const Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     Icon(
-        //       Icons.home,
-        //     ),
-        //     Icon(
-        //       Icons.search,
-        //     ),
-        //     Icon(
-        //       Icons.message,
-        //     ),
-        //     Icon(Icons.account_circle_outlined),
-        //   ],
-        // )
+
+        const Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Icon(
+              Icons.home,
+            ),
+            Icon(
+              Icons.search,
+            ),
+            Icon(
+              Icons.message,
+            ),
+            Icon(Icons.account_circle_outlined),
+          ],
+        )
       ]),
     );
   }
