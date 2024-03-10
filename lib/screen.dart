@@ -76,13 +76,15 @@ class Screen extends StatelessWidget {
                     width: 10,
                   ),
                   itemBuilder: (context, index) {
-                    return Storytile(name: datas.items[index]["name"], time: datas.items[index]["time"], photo: datas.items[index]["photos"], image: datas.items[index]["image"]);
+                    return Storytile(
+                        name: datas.items[index]["name"],
+                        time: datas.items[index]["time"],
+                        photo: datas.items[index]["photo"],
+                        image: datas.items[index]["image"]);
                   },
                 ),
               ),
             ),
-
-            
             Expanded(
               child: ListView.separated(
                 scrollDirection: Axis.vertical,
